@@ -1,8 +1,7 @@
 ---
 title: "Project Proposal Template"
 author: Ziqi Tang
-output: 
-  github_document
+output: github_document
 ---
 
 [<i class="fa fa-file-code-o fa-1x" aria-hidden="true"></i> Download this file as a template ](http://adamwilson.us/SpatialDataScience/scripts/Project_ProposalTemplate.Rmd).
@@ -28,12 +27,12 @@ I found this graphic easy to understand yet rich with detail.  The graphic summa
 
 # Proposed data sources
 
-Be as specific as possible.
+
 
 # Proposed methods
 
-List the approach you will use. Don't simply list packages, tell me what you will do with them.
+
 
 # Expected results
 
-Describe what you want to produce (graphics, analyses, etc.)
+
