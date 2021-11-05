@@ -1,6 +1,6 @@
 ---
 title: "Project Proposal Template"
-author: Ideel Stoodent
+author: Ziqi Tang
 output: 
   github_document
 ---
