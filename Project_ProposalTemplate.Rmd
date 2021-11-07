@@ -1,11 +1,11 @@
 ---
 title: "Project Proposal Template"
 author: Ziqi Tang
+Date: 11/05/2021
 output: github_document
 ---
-
-[<i class="fa fa-file-code-o fa-1x" aria-hidden="true"></i> Download this file as a template ](http://adamwilson.us/SpatialDataScience/scripts/Project_ProposalTemplate.Rmd).
-
+```{R}
+```
 # Introduction to problem/question
   
 # Problem / Question
