@@ -43,10 +43,9 @@ Here's my first code chunk.
 Load any required packages in a code chunk (you may need to install some packages):
 
 ```{r, message=F, warning=F}
-library(tidyverse)
-library(leaflet)
-library(kableExtra)
-knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
+library(readxl)
+provinceNight <- read_excel("provinceNight.xls")
+View(provinceNight)
 ```
 
 ## Download and clean all required data
