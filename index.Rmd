@@ -11,7 +11,7 @@ Clearly stated background and questions / hypotheses / problems being addressed.
 
 # Materials and methods
 
-[~ words]
+
 
 Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
 
