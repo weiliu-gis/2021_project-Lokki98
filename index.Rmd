@@ -5,7 +5,7 @@ author: Ziqi Tang
 
 # Introduction
 
-[~ words]
+
 
 Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way.
 
