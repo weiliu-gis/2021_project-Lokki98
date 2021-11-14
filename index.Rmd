@@ -5,13 +5,9 @@ author: Ziqi Tang
 
 # Introduction
 
-
-
 Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way.
 
 # Materials and methods
-
-
 
 Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
 
