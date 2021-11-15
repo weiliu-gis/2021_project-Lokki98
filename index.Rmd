@@ -45,7 +45,7 @@ head(provinceNight)
 ```
 
 
-```{r}
+```{r,warning=FALSE}
 ggplot(provinceNight,aes(x = year,y = mean,color = province)) +
  geom_point() +
  geom_line() +
