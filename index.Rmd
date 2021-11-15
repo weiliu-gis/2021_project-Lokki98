@@ -32,7 +32,8 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 Here's my first code chunk.
 ```{r}
-1+2
+library(ggplot2)
+library(gghighlight)
 ```
 
 Load any required packages in a code chunk (you may need to install some packages):
@@ -43,9 +44,23 @@ provinceNight <- read_excel("provinceNight.xls")
 head(provinceNight)
 ```
 
-## Download and clean all required data
-```{r}
 
+```{r}
+ggplot(provinceNight,aes(x = year,y = mean,color = province)) +
+ geom_point() +
+ geom_line() +
+ theme(legend.position="bottom",
+        legend.text=element_text(size=7),
+        legend.title = element_blank(),
+        legend.background = element_rect(fill = "#f2eadf",
+                                         color = "grey55",
+                                         size = 2)) + 
+  gghighlight(province %in% c("xianggang","shanghai","beijing","aomen"),
+              label_key = province) +
+  labs(x = " ",y = "mean value of nighttime light value",title = "Changes of nighttime average lighting values in China's provinces")
+  
+ggsave("change of nighttime value.png", 
+       width = 40, height = 20, device = png)
 ```
 
 ```{r, results='asis'}
