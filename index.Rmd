@@ -55,7 +55,7 @@ ggplot(provinceNight,aes(x = year,y = mean,color = province)) +
         legend.background = element_rect(fill = "#f2eadf",
                                          color = "grey55",
                                          size = 2)) + 
-  gghighlight(province %in% c("xianggang","shanghai","beijing","aomen"),
+  gghighlight(province %in% c("Hongkong","Shanghai","Beijing","Macau"),
               label_key = province) +
   labs(x = " ",y = "mean value of nighttime light value",title = "Changes of nighttime average lighting values in China's provinces")
   
