@@ -35,7 +35,6 @@ Here's my first code chunk.
 library(tidyverse)
 library(sf)
 library(raster)
-library(gghighlight)
 ```
 
 Load any required packages in a code chunk (you may need to install some packages):
