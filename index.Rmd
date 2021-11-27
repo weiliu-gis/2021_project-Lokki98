@@ -32,12 +32,8 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 Here's my first code chunk.
 ```{r,message=F,warning=F}
-library(tidyverse)
-library(sf)
-library(raster)
+library(ggplot2)
 library(gghighlight)
-library(ggspatial) 
-library(ggforce)
 ```
 
 Load any required packages in a code chunk (you may need to install some packages):
@@ -45,11 +41,11 @@ Load any required packages in a code chunk (you may need to install some package
 ```{r, message=F, warning=F}
 library(readxl)
 provinceNight <- read_excel("provinceNight.xls")
-head(provinceNight)
+
 ```
 
 
-```{r,warning=FALSE}
+```{r,warning=FALSE,message=FALSE}
 ggplot(provinceNight,aes(x = year,y = mean,color = province)) +
  geom_point() +
  geom_line() +
@@ -59,17 +55,12 @@ ggplot(provinceNight,aes(x = year,y = mean,color = province)) +
         legend.background = element_rect(fill = "#f2eadf",
                                          color = "grey55",
                                          size = 2)) + 
-  gghighlight(province %in% c("Hongkong","Shanghai","Beijing","Macau"),
-              label_key = province) +
   labs(x = " ",y = "mean value of nighttime light value",title = "Changes of nighttime average lighting values in China's provinces")
   
 ggsave("change of nighttime value.png", 
        width = 40, height = 20, device = png)
 ```
 
-```{r, results='asis'}
-
-```
 
 Add any additional processing steps here.
 
@@ -80,15 +71,6 @@ Add any additional processing steps here.
 Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author looked at the data in many different ways before coming to the final presentation of the data.
 
 Show tables, plots, etc. and describe them.
-
-```{r, fig.width=6, fig.height=3, fig.cap="Map of completely random data"}
-
-```
-
-
-```{r}
-
-```
 
 # Conclusions
 
