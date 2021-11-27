@@ -72,7 +72,6 @@ provinceNight %>%
   dplyr::select(-year) %>% 
   left_join(provmap) %>% 
   st_sf() -> df3
-
 df3
 
 df3 %>% 
