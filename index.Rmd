@@ -46,19 +46,20 @@ provinceNight <- read_excel("provinceNight.xls")
 
 
 ```{r,warning=FALSE,message=FALSE}
-ggplot(provinceNight,aes(x = year,y = mean,color = province)) +
- geom_point() +
- geom_line() +
+ggplot(provinceNight) +
+ geom_line(aes(year,mean,color = province)) +
  theme(legend.position="bottom",
         legend.text=element_text(size=7),
         legend.title = element_blank(),
         legend.background = element_rect(fill = "#f2eadf",
                                          color = "grey55",
-                                         size = 2)) + 
-  labs(x = " ",y = "mean value of nighttime light value",title = "Changes of nighttime average lighting values in China's provinces")
+                                         size = 2))
   
 ggsave("change of nighttime value.png", 
        width = 40, height = 20, device = png)
+```
+```{R}
+
 ```
 
 
