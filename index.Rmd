@@ -106,16 +106,7 @@ Average night light brightness",
     )
   ) + 
   scale_x_continuous(expand = c(0.02, 0.02)) +
-  scale_y_continuous(expand = c(0.02, 0.02)) +
-  ggspatial::annotation_scale(
-    width_hint = 0.2, 
-    pad_x = unit(0.5, "cm")
-  ) + 
-  ggspatial::annotation_north_arrow(
-    location = "tr", which_north = "false",
-    width = unit(0.6, "cm"), 
-    height = unit(1, "cm")
-  ) 
+  scale_y_continuous(expand = c(0.02, 0.02))
 ```
 
 
