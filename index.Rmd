@@ -32,7 +32,9 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 Here's my first code chunk.
 ```{r,message=F,warning=F}
-library(ggplot2)
+library(tidyverse)
+library(sf)
+library(raster)
 library(gghighlight)
 ```
 
@@ -41,7 +43,6 @@ Load any required packages in a code chunk (you may need to install some package
 ```{r, message=F, warning=F}
 library(readxl)
 provinceNight <- read_excel("provinceNight.xls")
-
 ```
 
 
@@ -53,12 +54,14 @@ ggplot(provinceNight) +
         legend.title = element_blank(),
         legend.background = element_rect(fill = "#f2eadf",
                                          color = "grey55",
-                                         size = 2))
+                                         size = 2)) +
+  labs(x = " ",y = "mean value of nighttime light value",title = "Changes of nighttime average lighting values in China's provinces")
   
 ggsave("change of nighttime value.png", 
        width = 40, height = 20, device = png)
 ```
 ```{R}
+countymap <- read_sf("data/AdministrativeDivisions/县.SHP")
 
 ```
 
