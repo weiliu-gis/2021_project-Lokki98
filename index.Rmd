@@ -31,9 +31,13 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 
 Here's my first code chunk.
-```{r}
-library(ggplot2)
+```{r,message=F,warning=F}
+library(tidyverse)
+library(sf)
+library(raster)
 library(gghighlight)
+library(ggspatial) 
+library(ggforce)
 ```
 
 Load any required packages in a code chunk (you may need to install some packages):
