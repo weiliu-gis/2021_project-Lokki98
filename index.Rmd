@@ -60,7 +60,6 @@ ggplot(provinceNight) +
   
 ggsave("change of nighttime value.png", 
        width = 40, height = 20, device = png)
-View(provinceNight)
 ```
 ```{R}
 read_sf("NineSegment.geojson") -> cn
