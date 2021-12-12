@@ -65,7 +65,7 @@ ggsave("change of nighttime value.png",
 ```{R}
 read_sf("NineSegment.geojson") -> cn
 read_sf('data/AdministrativeDivisions/province.shp') -> provmap
-read_sf('data/AdministrativeDivisions/市.shp') -> citymap
+read_sf('data/AdministrativeDivisions/City.shp') -> citymap
 read_sf('data/AdministrativeDivisions/县.shp') -> countymap
 read_sf("data/Coastline/海岸线.shp") -> hax
 
