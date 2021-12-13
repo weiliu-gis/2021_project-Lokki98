@@ -58,9 +58,6 @@ gg <- ggplot(provinceNight) +
                                          color = "grey55",
                                          size = 2)) +
   labs(x = " ",y = "mean value of nighttime light value",title = "Changes of nighttime average lighting values in China's provinces")
-  
-ggsave("change of nighttime value.png", 
-       width = 40, height = 20, device = png)
 
 plot(gg)
 ```
