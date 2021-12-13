@@ -59,7 +59,6 @@ gg1 <- ggplot(provinceNight) +
                                          size = 2)) +
   labs(x = " ",y = "mean value of nighttime light value",title = "Changes of nighttime average lighting values in China's provinces")
 
-plot(gg1)
 ```
 ```{r include=FALSE}
 read_sf("NineSegment.geojson") -> cn
