@@ -63,7 +63,7 @@ ggsave("change of nighttime value.png",
        width = 40, height = 19, device = png)
 
 ```
-```{r include=FALSE}
+```{r,include=FALSE}
 read_sf("NineSegment.geojson") -> cn
 read_sf('data/AdministrativeDivisions/province.shp') -> provmap
 read_sf('data/AdministrativeDivisions/市.shp') -> citymap
