@@ -32,7 +32,6 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 Here's my first code chunk.
 ```{r,message=FALSE,warning=FALSE}
-library(latex2exp)
 library(scico)
 library(dplyr)
 library(sp)
