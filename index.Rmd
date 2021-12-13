@@ -94,7 +94,6 @@ df3 %>%
     direction = -1,
     trans = "log10",
     breaks = c(0.01, 0.6, 25),
-    labels = c("Dim", latex2exp::TeX("$\\leftarrow$ Night light brightness  $\\rightarrow$"), "Bright"),
     name = "Provinces of China in 2020\n
 Average night light brightness",
     guide = guide_colorbar(
