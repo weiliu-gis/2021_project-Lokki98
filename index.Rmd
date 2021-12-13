@@ -33,11 +33,12 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 Here's my first code chunk.
 ```{r}
+library(latex2exp)
 library(scico)
 library(dplyr)
 library(sp)
+library(tidyverse)
 library(sf)
-library(ggplot2)
 ```
 
 Load any required packages in a code chunk (you may need to install some packages):
@@ -49,7 +50,7 @@ provinceNight <- read_excel("provinceNight.xls")
 
 
 ```{r,warning=FALSE,message=FALSE}
-gg1 <- ggplot(provinceNight) +
+ggplot(provinceNight) +
  geom_line(aes(year,mean,color = province)) +
  theme(legend.position="bottom",
         legend.text=element_text(size=7),
@@ -58,16 +59,58 @@ gg1 <- ggplot(provinceNight) +
                                          color = "grey55",
                                          size = 2)) +
   labs(x = " ",y = "mean value of nighttime light value",title = "Changes of nighttime average lighting values in China's provinces")
+ggsave("change of nighttime value.png", 
+       width = 40, height = 20, device = png)
 
 ```
 ```{r include=FALSE}
 read_sf("NineSegment.geojson") -> cn
-read_sf('data/AdministrativeDivisions/省.shp') -> provmap
+read_sf('data/AdministrativeDivisions/province.shp') -> provmap
 read_sf('data/AdministrativeDivisions/市.shp') -> citymap
 read_sf('data/AdministrativeDivisions/县.shp') -> countymap
 read_sf("data/Coastline/海岸线.shp") -> hax
+provmap
 ```
 ```{r}
+provinceNight %>% 
+  dplyr::filter(year == 2020) %>% 
+  dplyr::select(-year) %>% 
+  left_join(provmap) %>% 
+  st_sf() -> df3
+
+df3 %>% 
+  ggplot() + 
+  geom_sf(aes(fill = mean), size = 0.01, 
+          color = "white") + 
+  geom_sf(data = cn, size = 0.5, 
+          color = "black", fill = NA) +
+  geom_sf(data = hax, color = "#0055AA") + 
+  stat_sf_coordinates(geom = "text", color = "gray60",
+                      aes(label = province),
+                      size = 0.9) +
+  coord_sf(crs = "+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs",
+           xlim = c(-3500000, 3090000)) + 
+  scico::scale_fill_scico(
+    palette = "lajolla",
+    direction = -1,
+    trans = "log10",
+    breaks = c(0.01, 0.6, 25),
+    labels = c("Dim", latex2exp::TeX("$\\leftarrow$ Night light brightness  $\\rightarrow$"), "Bright"),
+    name = "Provinces of China in 2020\n
+Average night light brightness",
+    guide = guide_colorbar(
+      direction = "horizontal",
+      barheight = unit(3, units = "mm"),
+      barwidth = unit(60, units = "mm"),
+      draw.ulim = FALSE,
+      ticks.colour = "transparent",
+      title.position = 'top',
+      title.hjust = 0.5,
+      label.hjust = 0.5
+    )
+  ) + 
+  scale_x_continuous(expand = c(0.02, 0.02)) +
+  scale_y_continuous(expand = c(0.02, 0.02))
 ```
 
 
