@@ -32,7 +32,7 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 
 Here's my first code chunk.
-```{r,message=FALSE,warning=FALSE}
+```{r}
 library(scico)
 library(dplyr)
 library(sp)
