@@ -49,26 +49,9 @@ provinceNight <- read_excel("provinceNight.xls")
 
 
 ```{r,warning=FALSE,message=FALSE}
-ggplot(provinceNight) +
- geom_line(aes(year,mean,color = province)) +
- theme(legend.position="bottom",
-        legend.text=element_text(size=7),
-        legend.title = element_blank(),
-        legend.background = element_rect(fill = "#f2eadf",
-                                         color = "grey55",
-                                         size = 2)) +
-  labs(x = " ",y = "mean value of nighttime light value",title = "Changes of nighttime average lighting values in China's provinces")
-ggsave("change of nighttime value.png", 
-       width = 40, height = 19, device = png)
 
 ```
 ```{R include = FALSE}
-read_sf("NineSegment.geojson") -> cn
-read_sf('data/AdministrativeDivisions/province.shp') -> provmap
-read_sf('data/AdministrativeDivisions/市.shp') -> citymap
-read_sf('data/AdministrativeDivisions/县.shp') -> countymap
-read_sf("data/Coastline/海岸线.shp") -> hax1
-provmap
 ```
 ```{r}
 ```
