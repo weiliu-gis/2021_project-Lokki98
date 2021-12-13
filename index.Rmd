@@ -37,7 +37,7 @@ Here's my first code chunk.
 library(scico)
 library(dplyr)
 library(sp)
-library(tidyverse)
+library(ggplot2)
 library(sf)
 ```
 
