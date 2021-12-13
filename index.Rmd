@@ -33,7 +33,6 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 Here's my first code chunk.
 ```{r}
-library(scico)
 library(dplyr)
 library(sp)
 library(ggplot2)
@@ -43,8 +42,7 @@ library(sf)
 Load any required packages in a code chunk (you may need to install some packages):
 
 ```{r, message=F, warning=F}
-library(readxl)
-provinceNight <- read_excel("provinceNight.xls")
+
 ```
 
 
