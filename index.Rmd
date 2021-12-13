@@ -36,7 +36,6 @@ Here's my first code chunk.
 library(scico)
 library(dplyr)
 library(sp)
-library(tidyverse)
 library(sf)
 library(ggplot2)
 ```
@@ -50,7 +49,7 @@ provinceNight <- read_excel("provinceNight.xls")
 
 
 ```{r,warning=FALSE,message=FALSE}
-ggplot(provinceNight) +
+gg <- ggplot(provinceNight) +
  geom_line(aes(year,mean,color = province)) +
  theme(legend.position="bottom",
         legend.text=element_text(size=7),
@@ -62,6 +61,8 @@ ggplot(provinceNight) +
   
 ggsave("change of nighttime value.png", 
        width = 40, height = 20, device = png)
+
+plot(gg)
 ```
 ```{r include=FALSE}
 read_sf("NineSegment.geojson") -> cn
@@ -70,7 +71,7 @@ read_sf('data/AdministrativeDivisions/市.shp') -> citymap
 read_sf('data/AdministrativeDivisions/县.shp') -> countymap
 read_sf("data/Coastline/海岸线.shp") -> hax
 ```
-```{R}
+```{r}
 provinceNight %>% 
   dplyr::filter(year == 2020) %>% 
   dplyr::select(-year) %>% 
