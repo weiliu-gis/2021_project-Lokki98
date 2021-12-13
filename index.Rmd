@@ -62,13 +62,14 @@ ggplot(provinceNight) +
 ggsave("change of nighttime value.png", 
        width = 40, height = 20, device = png)
 ```
-```{R}
+```{r include=FALSE}
 read_sf("NineSegment.geojson") -> cn
 read_sf('data/AdministrativeDivisions/province.shp') -> provmap
 read_sf('data/AdministrativeDivisions/City.shp') -> citymap
 read_sf('data/AdministrativeDivisions/县.shp') -> countymap
 read_sf("data/Coastline/海岸线.shp") -> hax
-
+```
+```{R}
 provinceNight %>% 
   dplyr::filter(year == 2020) %>% 
   dplyr::select(-year) %>% 
