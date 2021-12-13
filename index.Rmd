@@ -69,27 +69,6 @@ read_sf('data/AdministrativeDivisions/县.shp') -> countymap
 read_sf("data/Coastline/海岸线.shp") -> hax
 ```
 ```{r}
-provinceNight %>% 
-  dplyr::filter(year == 2020) %>% 
-  dplyr::select(-year) %>% 
-  left_join(provmap) %>% 
-  st_sf() -> df3
-
-
-df3 %>% 
-  ggplot() + 
-  geom_sf(aes(fill = mean), size = 0.01, 
-          color = "white") + 
-  geom_sf(data = cn, size = 0.5, 
-          color = "black", fill = NA) +
-  geom_sf(data = hax, color = "#0055AA") + 
-  stat_sf_coordinates(geom = "text", color = "gray60",
-                      aes(label = province),
-                      size = 0.9) +
-  coord_sf(crs = "+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs",
-           xlim = c(-3500000, 3090000)) + 
-  scale_x_continuous(expand = c(0.02, 0.02)) +
-  scale_y_continuous(expand = c(0.02, 0.02))
 ```
 
 
