@@ -33,7 +33,7 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 Here's my first code chunk.
 ```{r}
-library(latex2exp)
+
 library(scico)
 library(dplyr)
 library(sp)
@@ -72,6 +72,7 @@ read_sf("data/Coastline/海岸线.shp") -> hax
 provmap
 ```
 ```{r}
+library(latex2exp)
 provinceNight %>% 
   dplyr::filter(year == 2020) %>% 
   dplyr::select(-year) %>% 
