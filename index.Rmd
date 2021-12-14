@@ -46,14 +46,6 @@ Load any required packages in a code chunk (you may need to install some package
 ```
 
 
-```{r,warning=FALSE,message=FALSE}
-
-```
-```{R include = FALSE}
-```
-```{r}
-```
-
 
 Add any additional processing steps here.
 
