@@ -47,7 +47,7 @@ library(knitr)
 library(rmarkdown)
 library(leaflet)
 library(kableExtra)
-knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
+knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compilin
 ```
 
 ## Download and clean all required data
