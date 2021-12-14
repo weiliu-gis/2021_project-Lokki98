@@ -29,7 +29,7 @@ You can do bullets like this:
 You can do numbers like this:
 
 1. The first most important thing
-2. The second most important thing
+2. The second most important thin
 3. The third most important thing
 
 See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the amazing things you can do.
