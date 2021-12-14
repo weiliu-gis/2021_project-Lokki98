@@ -3,8 +3,3 @@ title: "About This Website"
 ---
 
 More about this website.
-```{r, message=F, warning=F}
-library(readxl)
-provinceNight <- read_excel("provinceNight.xls")
-head(provinceNight)
-```
