@@ -36,9 +36,7 @@ Here's my first code chunk.
 
 Load any required packages in a code chunk (you may need to install some packages):
 
-```{r, message=F, warning=F}
 
-```
 
 
 
