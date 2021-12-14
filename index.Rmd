@@ -61,7 +61,7 @@ Add any additional processing steps here.
 
 [~200 words]
 
-Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author looked at the data in many different ways before coming to the final presentation of the data.
+Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author lookeat the data in many different ways before coming to the final presentation of the data.
 
 Show tables, plots, etc. and describe them.
 
