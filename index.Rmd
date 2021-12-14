@@ -1,6 +1,6 @@
 ---
 title: "My Final Project Template"
-author: Ziqi Tang
+author: Ziqi
 subtitle: Subtitle here if desired
 ---
 
