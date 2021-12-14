@@ -1,6 +1,6 @@
 ---
 title: "My Final Project Template"
-author: Zii12212
+author: Zi
 subtitle: Subtitle here if desired
 ---
 
@@ -12,10 +12,6 @@ Clearly stated background and questions / hypotheses / problems being addressed.
 weird weather
 
 
-```{R}
-library(tidyselect)
-
-```
 # Materials and methods
 
 [~ 200 words]
