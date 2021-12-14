@@ -1,14 +1,18 @@
 ---
-title: "My Final Project"
-author: Ziqi Tang
+title: "My Final Project Template"
+author: Your name here
+subtitle: Subtitle here if desired
 ---
 
 # Introduction
 
+[~ 200 words]
+
 Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way.
-Background:
-Between now and 2050, the world’s urban population is expected to grow by 2.5 billion, an addition of about 170,000 people a day, according to estimates by the United Nations. A majority of this growth will occur in developing countries. As Earth’s population continues to grow, remote sensing data offer a view from space of human behaviors, whether from changing the landscape through deforestation and urbanization or modifying air quality through increases in pollutants
+
 # Materials and methods
+
+[~ 200 words]
 
 Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
 
@@ -32,13 +36,38 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 
 Here's my first code chunk.
-
+```{r}
+1+2
+```
 
 Load any required packages in a code chunk (you may need to install some packages):
 
+```{r, message=F, warning=F}
+library(tidyverse)
+library(leaflet)
+library(kableExtra)
+knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
+```
 
+## Download and clean all required data
+```{r}
+n=20
+data=data.frame(x=runif(n,-180,180),
+                y=runif(n,-60,60),
+                size = runif(n, 5, 20),
+                category = factor(
+                  sample(letters[1:5], n, replace = TRUE)
+                  ),
+                value = rnorm(n))
+```
 
-
+```{r, results='asis'}
+data %>% 
+  slice(1:10) %>% #show only 1:n rows
+  kable(digits=2,align="c")%>% #make table and round to two digits
+  kable_styling(bootstrap_options = 
+                  c("striped", "hover", "condensed", "responsive")) #apply other formatting
+```
 
 Add any additional processing steps here.
 
@@ -48,7 +77,22 @@ Add any additional processing steps here.
 
 Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author looked at the data in many different ways before coming to the final presentation of the data.
 
-Show tables, plots, etc. and describe them.hhhh
+Show tables, plots, etc. and describe them.
+
+```{r, fig.width=6, fig.height=3, fig.cap="Map of completely random data"}
+m <- leaflet(data) %>% 
+  addTiles() %>% 
+  addCircleMarkers(~x, ~y, radius = ~size,color = ~as.factor(category)) %>% 
+  addPopups(~x[2], ~y[2], "Random popup")
+m  # a map with the default OSM tile layer
+```
+
+
+```{r}
+data %>% 
+  ggplot(aes(x=x,y=y,col=category))+
+  geom_point()
+```
 
 # Conclusions
 
@@ -58,4 +102,4 @@ Clear summary adequately describing the results and putting them in context. Dis
 
 # References
 
-All sources are cited in a consistent manner.
+All sources are cited in a consistent manner
