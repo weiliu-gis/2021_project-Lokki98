@@ -7,7 +7,7 @@ author: Ziqi Tang
 
 Clearly stated background and questions / hypotheses / problems being addressed. Sets up the analysis in an interesting and compelling way.
 Background:
-Between now and 2050, the world’s urban population is expected to grow by 2.5 billion, an addition of about 170,000 people a day, according to estimates by the United Nations. A majority of this growth will occur in developing countries. As Earth’s population continues to grow, remote sensing data offer a view from space of human behaviors, whether from changing the landscape through deforestation and urbanization or modifying air quality through increases in pollutants. 
+Between now and 2050, the world’s urban population is expected to grow by 2.5 billion, an addition of about 170,000 people a day, according to estimates by the United Nations. A majority of this growth will occur in developing countries. As Earth’s population continues to grow, remote sensing data offer a view from space of human behaviors, whether from changing the landscape through deforestation and urbanization or modifying air quality through increases in pollutants
 # Materials and methods
 
 Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
