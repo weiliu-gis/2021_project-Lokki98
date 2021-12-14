@@ -36,23 +36,14 @@ See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the a
 
 
 Here's my first code chunk.
-```{r}
-1+2
-```
+
 
 Load any required packages in a code chunk (you may need to install some packages):
 
-```{r, message=F, warning=F}
-```
+
 
 ## Download and clean all required data
-```{r}
 
-```
-
-```{r, results='asis'}
-
-```
 
 Add any additional processing steps here.
 
