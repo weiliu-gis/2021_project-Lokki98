@@ -53,7 +53,7 @@ knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compiling
 
 ## Download and clean all required data
 ```{r}
-n=20
+n=19
 data=data.frame(x=runif(n,-180,180),
                 y=runif(n,-60,60),
                 size = runif(n, 5, 20),
