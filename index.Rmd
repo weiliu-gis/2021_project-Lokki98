@@ -43,11 +43,7 @@ Here's my first code chunk.
 Load any required packages in a code chunk (you may need to install some packages):
 
 ```{r, message=F, warning=F}
-library(knitr)
-library(rmarkdown)
-library(leaflet)
-
-knitr::opts_chunk$set(cache=TRUE)  # cache the results for quick compili
+ # cache the results for quick compili
 ```
 
 ## Download and clean all required data
