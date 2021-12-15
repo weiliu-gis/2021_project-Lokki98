@@ -12,6 +12,7 @@ Clearly stated background and questions / hypotheses / problems being addressed.
 weird weather
 
 ```{R}
+library(scico)
 library(tidyverse)
 library(sf)
 library(raster)
