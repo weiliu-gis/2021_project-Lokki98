@@ -8,7 +8,7 @@ subtitle: Subtitle here if desired
 
 [~ 200 words]
 Background:Remote sensing of nighttime light emissions offers a unique perspective for investigations into some of these human behaviors. The Visible Infrared Imaging Radiometer Suite (VIIRS) instruments aboard the joint NASA/NOAA Suomi National Polar-orbiting Partnership (Suomi NPP) and NOAA-20 satellites provide global daily measurements of nocturnal visible and near-infrared (NIR) light that are suitable for Earth system science and applications studies. VIIRS Day/Night Band (DNB) data are used for estimating population, assessing electrification of remote areas, monitoring disasters and conflict, and understanding biological impacts of increased light pollution.
-Hypotheses:
+Hypotheses:Where the economy is more developed, the light value at night is greater. From 2000 to 2020, the average night light value keeps getting bigger.
 Problems being addressed:
 
 
@@ -126,7 +126,7 @@ df2 %>%
       label.hjust = 0.5
     )
   )
-ggsave("2000各城市平均夜光强度.png", width = 9, height = 9, device = png)
+ggsave("2000 average night light intensity in each city.png", width = 9, height = 9, device = png)
 ```
 [~ 200 words]
 ```{R}
