@@ -12,7 +12,12 @@ Clearly stated background and questions / hypotheses / problems being addressed.
 weird weather
 
 ```{R}
-library(ggplot2)
+library(tidyverse)
+library(sf)
+library(raster)
+library(gghighlight)
+library(ggspatial) 
+library(ggforce) 
 ```
 # Materials and methods
 
