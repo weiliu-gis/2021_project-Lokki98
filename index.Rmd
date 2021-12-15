@@ -22,17 +22,58 @@ library(ggforce)
 # Materials and methods
 ```{R}
 library(readxl)
-provinceNight <- read_excel("data/provinceNight.xls")
+provinceNight <- read_excel("data/2000~2020年全国各省份夜间灯光数据.xlsx")
 library(ggplot2)
-ggplot(data = provinceNight,aes(x = year,y = mean,color = province)) +
-  geom_line() +
-  geom_point() +
-  gghighlight::gghighlight(province %in% c("shanghai","aomen","chongqing","beijing")) +
-  scale_x_continuous(breaks = 2000:2020) +
-  labs(x = "", y = "Average luminous intensity",
-         title = "Changes in luminous intensity of Chinese cities from 2000 to 2020")
 ```
+```{R}
+read_sf("data/Segment.geojson") -> cn
+read_sf('data/2019行政区划/省.shp') -> provmap
+read_sf('data/2019行政区划/市.shp') -> citymap
+read_sf('data/2019行政区划/县.shp') -> countymap
+read_sf("data/Coastline/海岸线.shp") -> hax
+library(sf)
+library(dplyr)
+readxl::read_xlsx("data/2000~2020年全国各省份夜间灯光数据.xlsx") %>% 
+  dplyr::filter(年份 == 2020) %>% 
+  dplyr::select(-年份) %>% 
+  left_join(provmap) %>% 
+  st_sf() -> df3
 
+df3 %>% 
+  ggplot() + 
+  geom_sf(aes(fill = 均值), size = 0.01, 
+          color = "white") + 
+  geom_sf(data = cn, size = 0.5, 
+          color = "black", fill = NA) +
+  geom_sf(data = hax, color = "#0055AA") + 
+  stat_sf_coordinates(geom = "text", color = "gray60",
+                      aes(label = 省份),
+                      size = 0.9) +
+  coord_sf(crs = "+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs",
+           xlim = c(-3500000, 3090000)) + 
+  scale_x_continuous(expand = c(0.02, 0.02)) +
+  scale_y_continuous(expand = c(0.02, 0.02)) +
+  scico::scale_fill_scico(
+    palette = "lajolla",
+    direction = -1,
+    trans = "log10",
+    breaks = c(0.0025, 0.18, 20),
+    labels = c("昏暗", latex2exp::TeX("$\\leftarrow$ 夜间灯光亮度  $\\rightarrow$"), "明亮"),
+    name = "2020 年中国各城市\n平均夜间灯光亮度",
+    guide = guide_colorbar(
+      direction = "horizontal",
+      barheight = unit(3, units = "mm"),
+      barwidth = unit(60, units = "mm"),
+      draw.ulim = FALSE,
+      ticks.colour = "transparent",
+      title.position = 'top',
+      title.hjust = 0.5,
+      label.hjust = 0.5
+    )
+  )
+ggsave("2020各城市平均夜光强度.png", width = 9, height = 9, device = png) 
+
+```
 [~ 200 words]
 
 Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
