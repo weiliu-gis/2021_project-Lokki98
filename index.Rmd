@@ -46,7 +46,7 @@ read_sf("data/Segment.geojson") -> cn
 read_sf('data/2019AdministrativeDivisions/province.shp') -> provmap
 read_sf('data/2019AdministrativeDivisions/city.shp') -> citymap
 read_sf('data/2019AdministrativeDivisions/county.shp') -> countymap
-read_sf("data/Coastline/海岸线.shp") -> hax
+read_sf("data/Coastline/coastline.shp") -> hax
 library(sf)
 library(dplyr)
 readxl::read_xlsx("data/Province.xlsx") %>% 
@@ -140,7 +140,52 @@ readxl::read_xlsx("data/2000~2020年全国夜间灯光数据.xlsx") %>%
        title = "Changes in China's luminous intensity from 2000 to 2020")
 ```
 ```{R}
+raster("data/tif/cn2020.tif") -> cn2020
+cn2020 %>% 
+  aggregate(fact = 10, fun = mean) %>% 
+  rasterToPoints(spatial = TRUE) %>% 
+  st_as_sf() -> cn2020points
 
+cn2020points %>% 
+  st_transform("+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs") -> cn2020points
+
+```
+```{R}
+cn2020points %>% 
+  ggplot() + 
+  geom_sf(aes(color = cn2020), size = 0.01) + 
+  geom_sf(data = cn, size = 0.5, 
+          color = "black", fill = NA) + 
+  geom_sf(data = hax, color = "#0055AA") + 
+  scale_color_gradientn(colours = c("#1E1E1E", "#1E1E1E", "#fcfff7", "#f1ff8f", "#f1e93f", "#fabd08")) + 
+  annotation_scale(width_hint = 0.2,
+                   pad_x = unit(0.5, "cm")) + 
+  annotation_north_arrow(location = "tr", which_north = "false",
+                         width = unit(0.3, "cm"), 
+                         height = unit(0.2, "cm")) + 
+  coord_sf(crs = "+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs",
+           xlim = c(-3500000, 3090000)) + 
+  scico::scale_color_scico(
+    palette = "lajolla",
+    direction = -1,
+    trans = "log10",
+    breaks = c(0.02, 0.6, 20),
+    labels = c("Dimness", latex2exp::TeX("$\\leftarrow$ Night light brightness$\\rightarrow$"), "Brightness"),
+    name = "China's night light data in 2020",
+    guide = guide_colorbar(
+      direction = "horizontal",
+      barheight = unit(3, units = "mm"),
+      barwidth = unit(60, units = "mm"),
+      draw.ulim = FALSE,
+      ticks.colour = "transparent",
+      title.position = 'top',
+      title.hjust = 0.5,
+      label.hjust = 0.5
+    )
+  )  
+```
+```{R}
+ggsave("China's night light data in 2020.png", width = 9, height = 9, device = png)
 ```
 
 Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
