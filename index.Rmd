@@ -56,7 +56,7 @@ readxl::read_xlsx("data/2000~2020年全国各省份夜间灯光数据.xlsx") %>%
   st_sf() -> df3
 
 readxl::read_xlsx("data/2000~2020年全国各省份夜间灯光数据.xlsx") %>% 
-  dplyr::filter(year == 2019) %>% 
+  dplyr::filter(year == 2000) %>% 
   dplyr::select(-year) %>% 
   left_join(provmap) %>% 
   st_sf() -> df2
