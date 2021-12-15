@@ -90,8 +90,19 @@ ggsave("2020各城市平均夜光强度.png", width = 9, height = 9, device = pn
 
 ```
 [~ 200 words]
+```{R}
+readxl::read_xlsx("data/2000~2020年全国夜间灯光数据.xlsx") %>% 
+  ggplot(aes(x = 年份, y = 均值)) + 
+  geom_line() + 
+  geom_smooth() + 
+  scale_color_brewer(palette = "Set2") + 
+  scale_x_continuous(breaks = 2000:2020) + 
+  labs(x = "", y = "Average luminous intensity", 
+       title = "Changes in China's luminous intensity from 2000 to 2020")
+```
+```{R}
 
-
+```
 
 Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
 
