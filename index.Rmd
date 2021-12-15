@@ -28,6 +28,18 @@ library(ggforce)
 library(readxl)
 provinceNight <- read_excel("data/2000~2020年全国各省份夜间灯光数据.xlsx")
 library(ggplot2)
+
+gg <- ggplot(provinceNight) +
+ geom_line(aes(年份,均值,color = 省份)) +
+ theme(legend.position="bottom",
+        legend.text=element_text(size=7),
+        legend.title = element_blank(),
+        legend.background = element_rect(fill = "#f2eadf",
+                                         color = "grey55",
+                                         size = 2)) +
+  labs(x = " ",y = "mean value of nighttime light value",title = "Changes of nighttime average lighting values in China's provinces")
+
+plot(gg)
 ```
 ```{R}
 read_sf("data/Segment.geojson") -> cn
