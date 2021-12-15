@@ -1,6 +1,6 @@
 ---
 title: "My Final Project Template"
-author: Zi
+author: Ziqi Tang
 subtitle: Subtitle here if desired
 ---
 
@@ -26,7 +26,7 @@ library(ggforce)
 # Materials and methods
 ```{R}
 library(readxl)
-provinceNight <- read_excel("data/2000~2020年全国各省份夜间灯光数据.xlsx")
+provinceNight <- read_excel("data/Province.xlsx")
 library(ggplot2)
 
 gg <- ggplot(provinceNight) +
@@ -49,13 +49,13 @@ read_sf('data/2019AdministrativeDivisions/county.shp') -> countymap
 read_sf("data/Coastline/海岸线.shp") -> hax
 library(sf)
 library(dplyr)
-readxl::read_xlsx("data/2000~2020年全国各省份夜间灯光数据.xlsx") %>% 
+readxl::read_xlsx("data/Province.xlsx") %>% 
   dplyr::filter(year == 2020) %>% 
   dplyr::select(-year) %>% 
   left_join(provmap) %>% 
   st_sf() -> df3
 
-readxl::read_xlsx("data/2000~2020年全国各省份夜间灯光数据.xlsx") %>% 
+readxl::read_xlsx("data/Province.xlsx") %>% 
   dplyr::filter(year == 2000) %>% 
   dplyr::select(-year) %>% 
   left_join(provmap) %>% 
@@ -126,7 +126,7 @@ df2 %>%
       label.hjust = 0.5
     )
   )
-ggsave("2019各城市平均夜光强度.png", width = 9, height = 9, device = png)
+ggsave("2000各城市平均夜光强度.png", width = 9, height = 9, device = png)
 ```
 [~ 200 words]
 ```{R}
