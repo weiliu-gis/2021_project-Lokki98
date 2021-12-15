@@ -20,6 +20,18 @@ library(ggspatial)
 library(ggforce) 
 ```
 # Materials and methods
+```{R}
+library(readxl)
+provinceNight <- read_excel("data/provinceNight.xls")
+library(ggplot2)
+ggplot(data = provinceNight,aes(x = year,y = mean,color = province)) +
+  geom_line() +
+  geom_point() +
+  gghighlight::gghighlight(province %in% c("shanghai","aomen","chongqing","beijing")) +
+  scale_x_continuous(breaks = 2000:2020) +
+  labs(x = "", y = "Average luminous intensity",
+         title = "Changes in luminous intensity of Chinese cities from 2000 to 2020")
+```
 
 [~ 200 words]
 
