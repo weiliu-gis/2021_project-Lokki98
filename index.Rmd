@@ -1,21 +1,25 @@
 ---
-title: "My Final Project Template"
+title: "The spatial distribution of nighttime light value in China "
 author: Ziqi Tang
-subtitle: Subtitle here if desired
 ---
 
 # Introduction
 
-[~ 200 words]
-Background:Remote sensing of nighttime light emissions offers a unique perspective for investigations into some of these human behaviors. The Visible Infrared Imaging Radiometer Suite (VIIRS) instruments aboard the joint NASA/NOAA Suomi National Polar-orbiting Partnership (Suomi NPP) and NOAA-20 satellites provide global daily measurements of nocturnal visible and near-infrared (NIR) light that are suitable for Earth system science and applications studies. VIIRS Day/Night Band (DNB) data are used for estimating population, assessing electrification of remote areas, monitoring disasters and conflict, and understanding biological impacts of increased light pollution.
-Hypotheses:Where the economy is more developed, the light value at night is greater. From 2000 to 2020, the average night light value keeps getting bigger.
-Problems being addressed:
+
+## Background
+Remote sensing of nighttime light emissions offers a unique perspective for investigations into some of these human behaviors. The Visible Infrared Imaging Radiometer Suite (VIIRS) instruments aboard the joint NASA/NOAA Suomi National Polar-orbiting Partnership (Suomi NPP) and NOAA-20 satellites provide global daily measurements of nocturnal visible and near-infrared (NIR) light that are suitable for Earth system science and applications studies. VIIRS Day/Night Band (DNB) data are used for estimating population, assessing electrification of remote areas, monitoring disasters and conflict, and understanding biological impacts of increased light pollution.
+
+## Hypotheses
+Where the economy is more developed, the light value at night is greater. From 2000 to 2020, the average night light value keeps getting bigger.
+## Problems being addressed
+what are the changes of nighttime light value in each province from 2000 to 2020? How the nighttime light values are distributed in the whole china?
+
 # Materials and methods
-Data:
+
+## Data
 The nighttime light data is downloaded from https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/YGIVCD.
 
-
-##Load required packages
+# Load required packages
 ```{R message = FALSE,warning = FALSE}
 library(latex2exp)
 library(scico)
@@ -28,11 +32,24 @@ library(ggforce)
 library(readxl)
 library(ggplot2)
 library(knitr)
+library(sf)
+library(dplyr)
 ```
 
-##The change of nighttime light value in each province 
-```{R}
+# Load data
+```{R message = FALSE,warning = FALSE}
 provinceNight <- read_excel("data/Province.xlsx")
+read_sf("data/Segment.geojson") -> cn
+read_sf('data/2019AdministrativeDivisions/province.shp') -> provmap
+read_sf('data/2019AdministrativeDivisions/city.shp') -> citymap
+read_sf('data/2019AdministrativeDivisions/county.shp') -> countymap
+read_sf("data/Coastline/coastline.shp") -> hax
+```
+
+# Results
+
+## The changes of nighttime light 
+```{R message = FALSE,warning = FALSE}
 kable(provinceNight[1:10,12:17],caption = "Nighttime values of each province")
 gg <- ggplot(provinceNight) +
  geom_line(aes(year,mean,color = province)) +
@@ -46,14 +63,9 @@ gg <- ggplot(provinceNight) +
 
 plot(gg)
 ```
-```{R}
-read_sf("data/Segment.geojson") -> cn
-read_sf('data/2019AdministrativeDivisions/province.shp') -> provmap
-read_sf('data/2019AdministrativeDivisions/city.shp') -> citymap
-read_sf('data/2019AdministrativeDivisions/county.shp') -> countymap
-read_sf("data/Coastline/coastline.shp") -> hax
-library(sf)
-library(dplyr)
+## The distribution of nighttime value in 2000&2020
+```{R message = FALSE,warning = FALSE}
+
 readxl::read_xlsx("data/Province.xlsx") %>% 
   dplyr::filter(year == 2020) %>% 
   dplyr::select(-year) %>% 
@@ -133,8 +145,8 @@ df2 %>%
   )
 ggsave("2000 average night light intensity in each city.png", width = 9, height = 9, device = png)
 ```
-[~ 200 words]
-```{R}
+
+```{R message = FALSE,warning = FALSE}
 readxl::read_xlsx("data/Country.xlsx") %>% 
   ggplot(aes(x = Year, y = Mean)) + 
   geom_line() + 
@@ -144,7 +156,7 @@ readxl::read_xlsx("data/Country.xlsx") %>%
   labs(x = "", y = "Average luminous intensity", 
        title = "Changes in China's luminous intensity from 2000 to 2020")
 ```
-```{R}
+```{R message = FALSE,warning = FALSE}
 raster("data/tif/cn2020.tif") -> cn2020
 cn2020 %>% 
   aggregate(fact = 10, fun = mean) %>% 
@@ -155,7 +167,9 @@ cn2020points %>%
   st_transform("+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs") -> cn2020points
 
 ```
-```{R}
+
+## Nighttime raster map
+```{R message = FALSE,warning = FALSE}
 cn2020points %>% 
   ggplot() + 
   geom_sf(aes(color = cn2020), size = 0.01) + 
@@ -190,12 +204,12 @@ cn2020points %>%
   )  
 ```
 
-```{R}
+```{R message = FALSE,warning = FALSE}
 ggsave("China's night light data in 2020.png", width = 9, height = 9, device = png)
 ```
 
-#The distribution of carbon emissions in China in 2018
-```{R}
+## The distribution of carbon emissions
+```{R message = FALSE,warning = FALSE}
 readxl::read_xlsx('data/Province.xlsx') ->dfeco
 dfeco %>% 
   dplyr::filter(year == 2018) %>% 
@@ -233,7 +247,7 @@ Co %>%
   scale_x_continuous(expand = c(0.02, 0.02)) +
   scale_y_continuous(expand = c(0.02, 0.02))
 ```
-#Calculate the Person Coefficient between Nightlight value and Carbon emissions
+## Calculate the Person Coefficient
 
 ```{R}
 res <- cor.test(Co$RawCoal, Co$mean, 
@@ -244,7 +258,6 @@ Narrative: Clear narrative description of the data sources and methods. Includes
 
 Code: The code associated with the project is well organized and easy to follow. Demonstrates mastery of R graphics and functions.
 
-Data: The underlying data are publicly accessible via the web and downloaded/accessed within the Rmd script. If you want to use your own data, you must make it available on a website (e.g. Figshare) so that others are able to re-run your code.
 
 You can do bullets like this:
 
