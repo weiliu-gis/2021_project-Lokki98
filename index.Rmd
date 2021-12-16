@@ -11,6 +11,7 @@ Remote sensing of nighttime light emissions offers a unique perspective for inve
 
 ## Hypotheses
 Where the economy is more developed, the light value at night is greater. From 2000 to 2020, the average night light value keeps getting bigger.
+
 ## Problems being addressed
 what are the changes of nighttime light value in each province from 2000 to 2020? How the nighttime light values are distributed in the whole china?
 
@@ -18,6 +19,8 @@ what are the changes of nighttime light value in each province from 2000 to 2020
 
 ## Data
 The nighttime light data is downloaded from https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/YGIVCD.
+
+The carbon data is downloaded from Carbon Emission Accounts & Datasets in China.
 
 # Load required packages
 ```{R message = FALSE,warning = FALSE}
@@ -63,7 +66,8 @@ gg <- ggplot(provinceNight) +
 
 plot(gg)
 ```
-## The distribution of nighttime value in 2000&2020
+
+## The distribution of nighttime value in each province in 2000&2020
 ```{R message = FALSE,warning = FALSE}
 
 readxl::read_xlsx("data/Province.xlsx") %>% 
@@ -168,6 +172,45 @@ cn2020points %>%
 
 ```
 
+## The distribution of nighttime light value in each county
+```{R}
+readxl::read_xlsx('data/county.xlsx') %>% 
+  dplyr::filter(Year == 2020) %>% 
+  dplyr::select(-Year) %>% 
+  left_join(countymap) %>% 
+  st_sf() -> dfCounty
+
+dfCounty %>% 
+  ggplot() + 
+  geom_sf(aes(fill = Mean), size = 0.01, 
+          color = "white") + 
+  geom_sf(data = cn, size = 0.5, 
+          color = "black", fill = NA) +
+  geom_sf(data = hax, color = "#0055AA") + 
+  coord_sf(crs = "+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs",
+           xlim = c(-3500000, 3090000)) + 
+  scico::scale_fill_scico(
+    palette = "lajolla",
+    direction = -1,
+    trans = "log10",
+    breaks = c(0.0001, 0.06, 35),
+    labels = c("Dimness", latex2exp::TeX("$\\leftarrow$  Night light brightness  $\\rightarrow$"), "Brightness"),
+    name = "China's districts and counties in 2020\nAverage night light brightness",
+    guide = guide_colorbar(
+      direction = "horizontal",
+      barheight = unit(3, units = "mm"),
+      barwidth = unit(60, units = "mm"),
+      draw.ulim = FALSE,
+      ticks.colour = "transparent",
+      title.position = 'top',
+      title.hjust = 0.5,
+      label.hjust = 0.5
+    )
+  ) + 
+  scale_x_continuous(expand = c(0.02, 0.02)) +
+  scale_y_continuous(expand = c(0.02, 0.02))
+```
+
 ## Nighttime raster map
 ```{R message = FALSE,warning = FALSE}
 cn2020points %>% 
@@ -247,6 +290,7 @@ Co %>%
   scale_x_continuous(expand = c(0.02, 0.02)) +
   scale_y_continuous(expand = c(0.02, 0.02))
 ```
+
 ## Calculate the Person Coefficient
 
 ```{R}
@@ -256,7 +300,6 @@ res
 ```
 Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
 
-Code: The code associated with the project is well organized and easy to follow. Demonstrates mastery of R graphics and functions.
 
 
 You can do bullets like this:
@@ -271,28 +314,9 @@ You can do numbers like this:
 2. The second most important thin
 3. The third most important thing
 
-See [http://rmarkdown.rstudio.com/](http://rmarkdown.rstudio.com/) for all the amazing things you can do.
 
+## Analysis
 
-Here's my first code chunk.
-
-
-Load any required packages in a code chunk (you may need to install some packages):
-
-
-
-## Download and clean all required data
-
-
-Add any additional processing steps here.
-
-# Results
-
-[~200 words]
-
-Tables and figures (maps and other graphics) are carefully planned to convey the results of your analysis. Intense exploration and evidence of many trials and failures. The author lookeat the data in many different ways before coming to the final presentation of the data.
-
-Show tables, plots, etc. and describe them.
 
 
 
