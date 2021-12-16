@@ -4,10 +4,10 @@ author: Ziqi Tang
 ---
 
 ## Introduction
-
+Remote sensing of nighttime light emissions offers a unique perspective for investigations into some of these human behaviors. The Visible Infrared Imaging Radiometer Suite (VIIRS) instruments aboard the joint NASA/NOAA Suomi National Polar-orbiting Partnership (Suomi NPP) and NOAA-20 satellites provide global daily measurements of nocturnal visible and near-infrared (NIR) light that are suitable for Earth system science and applications studies. VIIRS Day/Night Band (DNB) data are used for estimating population, assessing electrification of remote areas, monitoring disasters and conflict, and understanding biological impacts of increased light pollution.
 
 ## Background
-Remote sensing of nighttime light emissions offers a unique perspective for investigations into some of these human behaviors. The Visible Infrared Imaging Radiometer Suite (VIIRS) instruments aboard the joint NASA/NOAA Suomi National Polar-orbiting Partnership (Suomi NPP) and NOAA-20 satellites provide global daily measurements of nocturnal visible and near-infrared (NIR) light that are suitable for Earth system science and applications studies. VIIRS Day/Night Band (DNB) data are used for estimating population, assessing electrification of remote areas, monitoring disasters and conflict, and understanding biological impacts of increased light pollution.
+China is the largest developing and most populous country, covering 28 provinces, four municipalities, and two special administrative regions. It is located in the west of the Pacific Ocean and in the east of many Central Asian countries, and has superior conditions of sea and land with convenient traffic and development potentials, which promote the development of the economy, culture, and civilization in China and provide good foundations for population growth. Although China’s economy is growing rapidly, its uneven spatial pattern is evident. In China, strong contrasts exist between East and West, rural and urban regions, and even between different districts of the same city. Unequal regional development may cause social instability that hinders sustainable development.
 
 ## Hypotheses
 Where the economy is more developed, the light value at night is greater. From 2000 to 2020, the average night light value keeps getting bigger.
@@ -298,23 +298,21 @@ res <- cor.test(Co$RawCoal, Co$mean,
                     method = "pearson")
 res
 ```
-Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
-
-
-## Analysis
-
-
-
-
 
 
 
 # Conclusions
+ It can be seen from the results that the night light value of China's internal areas is generally lower than that of China's coastal areas, indicating that China's coastal areas have more frequent night activities than inland areas. Urbanization is the basis of night activities, which also shows that urbanization in China's coastal regions is relatively high. Sites with a significant gap in the economic base have a large hole in the night light value in the area. From 2000 to 2020, due to the continuous growth of China's financial infrastructure and other reasons, the value of night lights of the whole country continued to grow steadily. The night light value in inland areas of China is still lower than that in coastal areas. However, the gap between different regions is decreasing, which shows that the economic level of economically underdeveloped regions is constantly improving.
 
-[~200 words]
 
-Clear summary adequately describing the results and putting them in context. Discussion of further questions and ways to continue investigation.
 
 # References
 
-All sources are cited in a consistent manner
+Xu, H., Yang, H., Li, X., Jin, H., & Li, D. (2015). Multi-Scale Measurement of Regional Inequality in Mainland China during 2005–2010 Using DMSP/OLS Night Light Imagery and Population Density Grid Data. Sustainability, 7(10), 13469–13499.
+
+Yu, S., Zhang, Z., & Liu, F. (2018). Monitoring Population Evolution in China Using Time-Series DMSP/OLS Nightlight Imagery. Remote Sensing, 10(2), 194. 
+
+
+
+
+
