@@ -3,7 +3,7 @@ title: "The spatial distribution of nighttime light value in China "
 author: Ziqi Tang
 ---
 
-# Introduction
+## Introduction
 
 
 ## Background
@@ -20,7 +20,7 @@ what are the changes of nighttime light value in each province from 2000 to 2020
 ## Data
 The nighttime light data is downloaded from https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/YGIVCD.
 
-The carbon data is downloaded from Carbon Emission Accounts & Datasets in China.
+The data of carbon emission is downloaded from Carbon Emission Accounts & Datasets in China.
 
 # Load required packages
 ```{R message = FALSE,warning = FALSE}
@@ -174,7 +174,7 @@ cn2020points %>%
 
 ## The distribution of nighttime light value in each county
 ```{R}
-readxl::read_xlsx('data/county.xlsx') %>% 
+readxl::read_xlsx('data/County.xlsx') %>% 
   dplyr::filter(Year == 2020) %>% 
   dplyr::select(-Year) %>% 
   left_join(countymap) %>% 
@@ -211,7 +211,7 @@ dfCounty %>%
   scale_y_continuous(expand = c(0.02, 0.02))
 ```
 
-## Nighttime raster map
+## The raster map of nighttime light
 ```{R message = FALSE,warning = FALSE}
 cn2020points %>% 
   ggplot() + 
@@ -299,20 +299,6 @@ res <- cor.test(Co$RawCoal, Co$mean,
 res
 ```
 Narrative: Clear narrative description of the data sources and methods. Includes data from at least two sources that were integrated / merged in R.
-
-
-
-You can do bullets like this:
-
-* The first most important thing
-* The second most important thing
-* The third most important thing
-
-You can do numbers like this:
-
-1. The first most important thing
-2. The second most important thin
-3. The third most important thing
 
 
 ## Analysis
