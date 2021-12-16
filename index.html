@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Ziqi Tang" />
+
+
+<title>The spatial distribution of nighttime light value in China</title>
+
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/simplex.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+      .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Spatial Data Science Final Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">The spatial distribution of nighttime light value in China</h1>
+<h4 class="author">Ziqi Tang</h4>
+
+</div>
+
+
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>Remote sensing of nighttime light emissions offers a unique perspective for investigations into some of these human behaviors. The Visible Infrared Imaging Radiometer Suite (VIIRS) instruments aboard the joint NASA/NOAA Suomi National Polar-orbiting Partnership (Suomi NPP) and NOAA-20 satellites provide global daily measurements of nocturnal visible and near-infrared (NIR) light that are suitable for Earth system science and applications studies. VIIRS Day/Night Band (DNB) data are used for estimating population, assessing electrification of remote areas, monitoring disasters and conflict, and understanding biological impacts of increased light pollution.</p>
+<div id="background" class="section level2">
+<h2>Background</h2>
+<p>China is one of the largest developing and most populous countries, covering 28 provinces, four municipalities, and two special administrative regions. It is located in the west of the Pacific Ocean and in the east of many Central Asian countries, and has superior conditions of sea and land with convenient traffic and development potentials, which promote the development of the economy, culture, and civilization in China and provide good foundations for population growth. Although China’s economy is growing rapidly, its uneven spatial pattern is evident. In China, strong contrasts exist between East and West, rural and urban regions, and even between different districts of the same city. Unequal regional development may cause social instability that hinders sustainable development.</p>
+</div>
+<div id="hypotheses" class="section level2">
+<h2>Hypotheses</h2>
+<p>Where the economy is more developed, the light value at night is greater. From 2000 to 2020, the average night light value keeps getting bigger.</p>
+</div>
+<div id="problems-being-addressed" class="section level2">
+<h2>Problems being addressed</h2>
+<p>what are the changes of nighttime light value in each province from 2000 to 2020? How the nighttime light values are distributed in the whole china?</p>
+</div>
+</div>
+<div id="materials-and-methods" class="section level1">
+<h1>Materials and methods</h1>
+<div id="data" class="section level2">
+<h2>Data</h2>
+<p>The nighttime light data is downloaded from <a href="https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/YGIVCD" class="uri">https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/YGIVCD</a>.</p>
+<p>The data of carbon emission is downloaded from Carbon Emission Accounts &amp; Datasets in China.</p>
+</div>
+</div>
+<div id="load-required-packages" class="section level1">
+<h1>Load required packages</h1>
+<pre class="r"><code>library(latex2exp)
+library(scico)
+library(tidyverse)
+library(sf)
+library(raster)
+library(gghighlight)
+library(ggspatial) 
+library(ggforce) 
+library(readxl)
+library(ggplot2)
+library(knitr)
+library(sf)
+library(dplyr)</code></pre>
+</div>
+<div id="load-data" class="section level1">
+<h1>Load data</h1>
+<pre class="r"><code>provinceNight &lt;- read_excel(&quot;data/Province.xlsx&quot;)
+read_sf(&quot;data/Segment.geojson&quot;) -&gt; cn
+read_sf(&#39;data/2019AdministrativeDivisions/province.shp&#39;) -&gt; provmap
+read_sf(&#39;data/2019AdministrativeDivisions/city.shp&#39;) -&gt; citymap
+read_sf(&#39;data/2019AdministrativeDivisions/county.shp&#39;) -&gt; countymap
+read_sf(&quot;data/Coastline/coastline.shp&quot;) -&gt; hax</code></pre>
+</div>
+<div id="results" class="section level1">
+<h1>Results</h1>
+<div id="the-changes-of-nighttime-light-value" class="section level2">
+<h2>The changes of nighttime light value</h2>
+<pre class="r"><code>kable(provinceNight[1:10,12:17],caption = &quot;Nighttime values of each province&quot;)</code></pre>
+<table>
+<caption>Nighttime values of each province</caption>
+<thead>
+<tr class="header">
+<th align="right">year</th>
+<th align="right">province code</th>
+<th align="left">province</th>
+<th align="right">mean</th>
+<th align="right">sum</th>
+<th align="right">standard deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2000</td>
+<td align="right">340000</td>
+<td align="left">anhui</td>
+<td align="right">0.0496429</td>
+<td align="right">32857.241</td>
+<td align="right">0.7106815</td>
+</tr>
+<tr class="even">
+<td align="right">2000</td>
+<td align="right">820000</td>
+<td align="left">macao</td>
+<td align="right">11.4331222</td>
+<td align="right">1680.669</td>
+<td align="right">23.6401838</td>
+</tr>
+<tr class="odd">
+<td align="right">2000</td>
+<td align="right">110000</td>
+<td align="left">beijing</td>
+<td align="right">2.1968540</td>
+<td align="right">188896.493</td>
+<td align="right">8.7485413</td>
+</tr>
+<tr class="even">
+<td align="right">2000</td>
+<td align="right">500000</td>
+<td align="left">chongqing</td>
+<td align="right">0.0277841</td>
+<td align="right">10614.191</td>
+<td align="right">0.4958285</td>
+</tr>
+<tr class="odd">
+<td align="right">2000</td>
+<td align="right">350000</td>
+<td align="left">fujian</td>
+<td align="right">0.0990399</td>
+<td align="right">54189.002</td>
+<td align="right">1.1354043</td>
+</tr>
+<tr class="even">
+<td align="right">2000</td>
+<td align="right">620000</td>
+<td align="left">gansu</td>
+<td align="right">0.0145384</td>
+<td align="right">31429.269</td>
+<td align="right">0.6332015</td>
+</tr>
+<tr class="odd">
+<td align="right">2000</td>
+<td align="right">440000</td>
+<td align="left">guangdong</td>
+<td align="right">0.5097869</td>
+<td align="right">397058.194</td>
+<td align="right">3.3080375</td>
+</tr>
+<tr class="even">
+<td align="right">2000</td>
+<td align="right">450000</td>
+<td align="left">guangxi</td>
+<td align="right">0.0226370</td>
+<td align="right">23529.078</td>
+<td align="right">0.4413306</td>
+</tr>
+<tr class="odd">
+<td align="right">2000</td>
+<td align="right">520000</td>
+<td align="left">guizhou</td>
+<td align="right">0.0113969</td>
+<td align="right">9031.660</td>
+<td align="right">0.2127269</td>
+</tr>
+<tr class="even">
+<td align="right">2000</td>
+<td align="right">460000</td>
+<td align="left">hainan</td>
+<td align="right">0.0694121</td>
+<td align="right">10264.244</td>
+<td align="right">1.2248777</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>gg &lt;- ggplot(provinceNight) +
+ geom_line(aes(year,mean,color = province)) +
+  gghighlight(province %in% c(&quot;shanghai&quot;, &quot;beijing&quot;,
+                        &quot;chongqing&quot;, &quot;tianjin&quot;, &quot;macao&quot;, &quot;hongkong&quot;)) +
+ theme(legend.position=&quot;bottom&quot;,
+        legend.text=element_text(size=7),
+        legend.title = element_blank(),
+        legend.background = element_rect(fill = &quot;#f2eadf&quot;,
+                                         color = &quot;grey55&quot;,
+                                         size = 2)) +
+  labs(x = &quot; &quot;,y = &quot;mean value of nighttime light value&quot;,title = &quot;Changes of nighttime average lighting values in China&#39;s provinces&quot;)
+
+plot(gg)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+</div>
+<div id="the-distribution-of-nighttime-value-in-each-province-in-20002020" class="section level2">
+<h2>The distribution of nighttime value in each province in 2000&amp;2020</h2>
+<pre class="r"><code>readxl::read_xlsx(&quot;data/Province.xlsx&quot;) %&gt;% 
+  dplyr::filter(year == 2020) %&gt;% 
+  dplyr::select(-year) %&gt;% 
+  left_join(provmap) %&gt;% 
+  st_sf() -&gt; df3
+
+readxl::read_xlsx(&quot;data/Province.xlsx&quot;) %&gt;% 
+  dplyr::filter(year == 2000) %&gt;% 
+  dplyr::select(-year) %&gt;% 
+  left_join(provmap) %&gt;% 
+  st_sf() -&gt; df2
+
+
+df3 %&gt;% 
+  ggplot() + 
+  geom_sf(aes(fill = mean), size = 0.01, 
+          color = &quot;white&quot;) + 
+  geom_sf(data = cn, size = 0.5, 
+          color = &quot;black&quot;, fill = NA) +
+  geom_sf(data = hax, color = &quot;#0055AA&quot;) + 
+  stat_sf_coordinates(geom = &quot;text&quot;, color = &quot;gray60&quot;,
+                      aes(label = province),
+                      size = 0.9) +
+  coord_sf(crs = &quot;+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs&quot;,
+           xlim = c(-3500000, 3090000)) + 
+  scale_x_continuous(expand = c(0.02, 0.02)) +
+  scale_y_continuous(expand = c(0.02, 0.02)) +
+  scico::scale_fill_scico(
+    direction = -1,
+    trans = &quot;log10&quot;,
+    breaks = c(0.0025, 0.18, 20),
+    labels = c(&quot;Dimness&quot;, latex2exp::TeX(&quot;$\\leftarrow$ Night light brightness$\\rightarrow$&quot;), &quot;Brightness&quot;),
+    name = &quot;China cities in 2020\nAverage night light brightness&quot;,
+    guide = guide_colorbar(
+      direction = &quot;horizontal&quot;,
+      barheight = unit(3, units = &quot;mm&quot;),
+      barwidth = unit(60, units = &quot;mm&quot;),
+      draw.ulim = FALSE,
+      ticks.colour = &quot;transparent&quot;,
+      title.position = &#39;top&#39;,
+      title.hjust = 0.5,
+      label.hjust = 0.5
+    )
+  )</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(&quot;2020 average night light intensity in each city.png&quot;, width = 9, height = 9, device = png) 
+
+df2 %&gt;% 
+  ggplot() + 
+  geom_sf(aes(fill = mean), size = 0.01, 
+          color = &quot;white&quot;) + 
+  geom_sf(data = cn, size = 0.5, 
+          color = &quot;black&quot;, fill = NA) +
+  geom_sf(data = hax, color = &quot;#0055AA&quot;) + 
+  stat_sf_coordinates(geom = &quot;text&quot;, color = &quot;gray60&quot;,
+                      aes(label = province),
+                      size = 0.9) +
+  coord_sf(crs = &quot;+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs&quot;,
+           xlim = c(-3500000, 3090000)) + 
+  scale_x_continuous(expand = c(0.02, 0.02)) +
+  scale_y_continuous(expand = c(0.02, 0.02)) +
+  scico::scale_fill_scico(
+    direction = -1,
+    trans = &quot;log10&quot;,
+    breaks = c(0.0025, 0.18, 20),
+    labels = c(&quot;Dimness&quot;, latex2exp::TeX(&quot;$\\leftarrow$ Night light brightness$\\rightarrow$&quot;), &quot;Brightness&quot;),
+    name = &quot;China cities in 2019\nAverage night light brightness&quot;,
+    guide = guide_colorbar(
+      direction = &quot;horizontal&quot;,
+      barheight = unit(3, units = &quot;mm&quot;),
+      barwidth = unit(60, units = &quot;mm&quot;),
+      draw.ulim = FALSE,
+      ticks.colour = &quot;transparent&quot;,
+      title.position = &#39;top&#39;,
+      title.hjust = 0.5,
+      label.hjust = 0.5
+    )
+  )</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<pre class="r"><code>ggsave(&quot;2000 average night light intensity in each city.png&quot;, width = 9, height = 9, device = png)</code></pre>
+<pre class="r"><code>readxl::read_xlsx(&quot;data/Country.xlsx&quot;) %&gt;% 
+  ggplot(aes(x = Year, y = Mean)) + 
+  geom_line() + 
+  geom_smooth() + 
+  scale_color_brewer(palette = &quot;Set2&quot;) + 
+  scale_x_continuous(breaks = 2000:2020) + 
+  labs(x = &quot;&quot;, y = &quot;Average luminous intensity&quot;, 
+       title = &quot;Changes in China&#39;s luminous intensity from 2000 to 2020&quot;)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<pre class="r"><code>raster(&quot;data/tif/cn2020.tif&quot;) -&gt; cn2020
+cn2020 %&gt;% 
+  aggregate(fact = 10, fun = mean) %&gt;% 
+  rasterToPoints(spatial = TRUE) %&gt;% 
+  st_as_sf() -&gt; cn2020points
+
+cn2020points %&gt;% 
+  st_transform(&quot;+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs&quot;) -&gt; cn2020points</code></pre>
+</div>
+<div id="the-distribution-of-nighttime-light-value-in-each-county" class="section level2">
+<h2>The distribution of nighttime light value in each county</h2>
+<pre class="r"><code>readxl::read_xlsx(&#39;data/County.xlsx&#39;) %&gt;% 
+  dplyr::filter(Year == 2020) %&gt;% 
+  dplyr::select(-Year) %&gt;% 
+  left_join(countymap) %&gt;% 
+  st_sf() -&gt; dfCounty</code></pre>
+<pre><code>## Joining, by = c(&quot;省代码&quot;, &quot;市代码&quot;, &quot;类型&quot;)</code></pre>
+<pre class="r"><code>dfCounty %&gt;% 
+  ggplot() + 
+  geom_sf(aes(fill = Mean), size = 0.01, 
+          color = &quot;white&quot;) + 
+  geom_sf(data = cn, size = 0.5, 
+          color = &quot;black&quot;, fill = NA) +
+  geom_sf(data = hax, color = &quot;#0055AA&quot;) + 
+  coord_sf(crs = &quot;+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs&quot;,
+           xlim = c(-3500000, 3090000)) + 
+  scico::scale_fill_scico(
+    palette = &quot;lajolla&quot;,
+    direction = -1,
+    trans = &quot;log10&quot;,
+    breaks = c(0.0001, 0.06, 35),
+    labels = c(&quot;Dimness&quot;, latex2exp::TeX(&quot;$\\leftarrow$  Night light brightness  $\\rightarrow$&quot;), &quot;Brightness&quot;),
+    name = &quot;China&#39;s districts and counties in 2020\nAverage night light brightness&quot;,
+    guide = guide_colorbar(
+      direction = &quot;horizontal&quot;,
+      barheight = unit(3, units = &quot;mm&quot;),
+      barwidth = unit(60, units = &quot;mm&quot;),
+      draw.ulim = FALSE,
+      ticks.colour = &quot;transparent&quot;,
+      title.position = &#39;top&#39;,
+      title.hjust = 0.5,
+      label.hjust = 0.5
+    )
+  ) + 
+  scale_x_continuous(expand = c(0.02, 0.02)) +
+  scale_y_continuous(expand = c(0.02, 0.02))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="the-raster-map-of-nighttime-light" class="section level2">
+<h2>The raster map of nighttime light</h2>
+<pre class="r"><code>cn2020points %&gt;% 
+  ggplot() + 
+  geom_sf(aes(color = cn2020), size = 0.01) + 
+  geom_sf(data = cn, size = 0.5, 
+          color = &quot;black&quot;, fill = NA) + 
+  geom_sf(data = hax, color = &quot;#0055AA&quot;) + 
+  scale_color_gradientn(colours = c(&quot;#1E1E1E&quot;, &quot;#1E1E1E&quot;, &quot;#fcfff7&quot;, &quot;#f1ff8f&quot;, &quot;#f1e93f&quot;, &quot;#fabd08&quot;)) + 
+  annotation_scale(width_hint = 0.2,
+                   pad_x = unit(0.5, &quot;cm&quot;)) + 
+  annotation_north_arrow(location = &quot;tr&quot;, which_north = &quot;false&quot;,
+                         width = unit(0.3, &quot;cm&quot;), 
+                         height = unit(0.2, &quot;cm&quot;)) + 
+  coord_sf(crs = &quot;+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs&quot;,
+           xlim = c(-3500000, 3090000)) + 
+  scico::scale_color_scico(
+    palette = &quot;lajolla&quot;,
+    direction = -1,
+    trans = &quot;log10&quot;,
+    breaks = c(0.02, 0.6, 20),
+    labels = c(&quot;Dimness&quot;, latex2exp::TeX(&quot;$\\leftarrow$ Night light brightness$\\rightarrow$&quot;), &quot;Brightness&quot;),
+    name = &quot;China&#39;s night light data in 2020&quot;,
+    guide = guide_colorbar(
+      direction = &quot;horizontal&quot;,
+      barheight = unit(3, units = &quot;mm&quot;),
+      barwidth = unit(60, units = &quot;mm&quot;),
+      draw.ulim = FALSE,
+      ticks.colour = &quot;transparent&quot;,
+      title.position = &#39;top&#39;,
+      title.hjust = 0.5,
+      label.hjust = 0.5
+    )
+  )  </code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>ggsave(&quot;China&#39;s night light data in 2020.png&quot;, width = 9, height = 9, device = png)</code></pre>
+</div>
+<div id="the-distribution-of-carbon-emissions" class="section level2">
+<h2>The distribution of carbon emissions</h2>
+<pre class="r"><code>readxl::read_xlsx(&#39;data/Province.xlsx&#39;) -&gt;dfeco
+dfeco %&gt;% 
+  dplyr::filter(year == 2018) %&gt;% 
+  dplyr::select(-year) %&gt;% 
+  left_join(provmap) %&gt;% 
+  st_sf() -&gt; Co
+
+Co %&gt;% 
+  ggplot() + 
+  geom_sf(aes(fill = RawCoal), size = 0.01, 
+          color = &quot;white&quot;)+
+  geom_sf(data = cn, size = 0.5, 
+          color = &quot;black&quot;, fill = NA) +
+  geom_sf(data = hax, color = &quot;#0055AA&quot;) + 
+  coord_sf(crs = &quot;+proj=lcc +lat_1=30 +lat_2=62 +lat_0=0 +lon_0=105 +x_0=0 +y_0=0 +ellps=krass +units=m +no_defs&quot;,
+           xlim = c(-3500000, 3090000)) + 
+  scico::scale_fill_scico(
+    palette = &quot;lajolla&quot;,
+    direction = -1,
+    trans = &quot;log10&quot;,
+    breaks = c(0.0001, 0.06, 35),
+    labels = c(&quot;&quot;, latex2exp::TeX(&quot;$\\leftarrow$ carbon emission  $\\rightarrow$&quot;), &quot;&quot;),
+    name = &quot;Provinces and cities in China in 2020\nAverage carbon emissions&quot;,
+    guide = guide_colorbar(
+      direction = &quot;horizontal&quot;,
+      barheight = unit(3, units = &quot;mm&quot;),
+      barwidth = unit(60, units = &quot;mm&quot;),
+      draw.ulim = FALSE,
+      ticks.colour = &quot;transparent&quot;,
+      title.position = &#39;top&#39;,
+      title.hjust = 0.5,
+      label.hjust = 0.5
+    )
+  ) + 
+  scale_x_continuous(expand = c(0.02, 0.02)) +
+  scale_y_continuous(expand = c(0.02, 0.02))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="calculate-the-person-coefficient" class="section level2">
+<h2>Calculate the Person Coefficient</h2>
+<pre class="r"><code>res &lt;- cor.test(Co$RawCoal, Co$mean, 
+                    method = &quot;pearson&quot;)
+res</code></pre>
+<pre><code>## 
+##  Pearson&#39;s product-moment correlation
+## 
+## data:  Co$RawCoal and Co$mean
+## t = -1.7746, df = 33, p-value = 0.08519
+## alternative hypothesis: true correlation is not equal to 0
+## 95 percent confidence interval:
+##  -0.57212917  0.04224436
+## sample estimates:
+##        cor 
+## -0.2951573</code></pre>
+</div>
+</div>
+<div id="conclusions" class="section level1">
+<h1>Conclusions</h1>
+<p>It can be seen from the results that the night light value of China’s internal areas is generally lower than that of China’s coastal areas, indicating that China’s coastal areas have more frequent night activities than inland areas. Urbanization is the basis of night activities, which also indicates that urbanization in China’s coastal regions is relatively high. Sites with a significant gap in the economic base have a large hole in the night light value in the area. From year 2000 to 2020, due to the continuous growth of China’s financial expenditure on electrical infrastructure, the value of night lights of the whole country continued to grow steadily. Furthermore, though the night light value in inland areas of China is still lower than that in coastal areas, the gap between different regions is narrowing, showing the unbalanced development among those regions is improving.</p>
+</div>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p>Xu, H., Yang, H., Li, X., Jin, H., &amp; Li, D. (2015). Multi-Scale Measurement of Regional Inequality in Mainland China during 2005–2010 Using DMSP/OLS Night Light Imagery and Population Density Grid Data. Sustainability, 7(10), 13469–13499.</p>
+<p>Yu, S., Zhang, Z., &amp; Liu, F. (2018). Monitoring Population Evolution in China Using Time-Series DMSP/OLS Nightlight Imagery. Remote Sensing, 10(2), 194.</p>
+<p>Ma, T.; Zhou, Y.; Zhou, C.; Haynie, S.; Pei, T.; Xu, T. Night-time light derived estimation of spatio-temporal characteristics of urbanization dynamics using DMSP/OLS satellite data. Remote Sens. Environ. 2015, 158, 453–464.</p>
+</div>
+
+<!-- give the footer some space -->
+<br/>
+<br/>
+
+<footer id="site-footer">
+  <div id="footer1">
+  This website is a project for Adam Wilson's <a href="https://wilsonlab.io/GEO511"><i> Spatial Data Science (GEO511) </i></a>Course at the University at Buffalo
+  </div>
+  <div id="footer2">
+  <a rel="license" property="http://creativecommons.org/ns#license"
+  href="http://creativecommons.org/licenses/by/4.0/" ><img src="img/cc-by.svg" alt="cc-by"/></a> 
+  </div>
+</footer>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+
+</body>
+</html>
