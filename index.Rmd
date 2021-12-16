@@ -295,7 +295,7 @@ Co %>%
 
 
 
-## Calculate the Person Coefficient
+## Calculate the Pearson Coefficient
 
 ```{R}
 res <- cor.test(Co$RawCoal, Co$mean, 
